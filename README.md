@@ -1,18 +1,31 @@
-# Salesforce DX Project: Next Steps
+# Salesforce Flow Docs Starter Kit
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+A small example repository showing one practical way to document Salesforce automation from metadata.
 
-## How Do You Plan to Deploy Your Changes?
+This repository was created as a companion example for the session:
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+**From “I Have a Flow” to “I Know What Happens”**
 
-## Configure Your Salesforce DX Project
+The main idea is simple:
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+> Do not start by asking AI to document a Salesforce org from a blank prompt.  
+> First extract repeatable facts from metadata. Then use those facts to create useful documentation.
 
-## Read All About It
+## What this repository demonstrates
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+Salesforce Flow is visual, but the canvas alone does not explain the full behaviour of an org.
+
+This starter kit shows a lightweight documentation workflow:
+
+```text
+Salesforce Flow metadata
+        ↓
+Deterministic extraction
+        ↓
+Structured technical Markdown
+        ↓
+AI-assisted documentation draft
+        ↓
+Human review
+        ↓
+Automation Impact Map + Living Technical Blueprint

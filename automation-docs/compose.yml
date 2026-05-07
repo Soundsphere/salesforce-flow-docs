@@ -1,0 +1,30 @@
+services:
+  automation-docs:
+    build:
+      context: ..
+      dockerfile: automation-docs/Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    command:
+      - --project-root
+      - /workspace
+      - --output
+      - automation-docs/output/salesforce-automation.md
+
+  tests:
+    build:
+      context: ..
+      dockerfile: automation-docs/Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    entrypoint:
+      - python
+    command:
+      - -m
+      - unittest
+      - discover
+      - -s
+      - automation-docs/tests
+

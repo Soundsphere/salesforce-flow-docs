@@ -1,0 +1,142 @@
+{
+  "version": "1.0",
+  "rules": [
+    {
+      "id": "process_builder_workflow",
+      "priority": 100,
+      "when_all": [
+        { "path": "processType", "equals": "Workflow" }
+      ],
+      "classify_as": {
+        "metadata_type": "Flow metadata",
+        "automation_type": "Process Builder",
+        "automation_family": "legacy_automation",
+        "classification_confidence": "high"
+      },
+      "evidence_paths": [
+        "processType",
+        "processMetadataValues.ObjectType",
+        "processMetadataValues.TriggerType",
+        "processMetadataValues.ObjectVariable",
+        "processMetadataValues.OldObjectVariable"
+      ],
+      "documentation_note": "This automation is stored as Flow metadata but should be documented as Process Builder."
+    },
+    {
+      "id": "legacy_invocable_process",
+      "priority": 90,
+      "when_all": [
+        { "path": "processType", "equals": "InvocableProcess" }
+      ],
+      "classify_as": {
+        "metadata_type": "Flow metadata",
+        "automation_type": "Legacy invocable process / likely Process Builder subprocess",
+        "automation_family": "legacy_automation",
+        "classification_confidence": "medium"
+      },
+      "evidence_paths": [
+        "processType",
+        "processMetadataValues.ObjectType",
+        "variables.SObject",
+        "variables.SObjectId"
+      ],
+      "documentation_note": "Treat as legacy invocable automation unless confirmed otherwise in the org."
+    },
+    {
+      "id": "field_service_web_flow",
+      "priority": 80,
+      "when_all": [
+        { "path": "processType", "equals": "FieldServiceWeb" }
+      ],
+      "classify_as": {
+        "metadata_type": "Flow metadata",
+        "automation_type": "Field Service / Snap-ins Flow",
+        "automation_family": "field_service",
+        "classification_confidence": "high"
+      },
+      "evidence_paths": [
+        "processType"
+      ]
+    },
+    {
+      "id": "record_triggered_flow_after_save",
+      "priority": 70,
+      "when_all": [
+        { "path": "processType", "equals": "AutoLaunchedFlow" },
+        { "path": "start.triggerType", "equals": "RecordAfterSave" }
+      ],
+      "classify_as": {
+        "metadata_type": "Flow metadata",
+        "automation_type": "Record-triggered Flow",
+        "execution_model": "After-save",
+        "classification_confidence": "high"
+      },
+      "evidence_paths": [
+        "processType",
+        "start.object",
+        "start.triggerType",
+        "start.recordTriggerType"
+      ]
+    },
+    {
+      "id": "record_triggered_flow_before_save",
+      "priority": 70,
+      "when_all": [
+        { "path": "processType", "equals": "AutoLaunchedFlow" },
+        { "path": "start.triggerType", "equals": "RecordBeforeSave" }
+      ],
+      "classify_as": {
+        "metadata_type": "Flow metadata",
+        "automation_type": "Record-triggered Flow",
+        "execution_model": "Before-save",
+        "classification_confidence": "high"
+      },
+      "evidence_paths": [
+        "processType",
+        "start.object",
+        "start.triggerType",
+        "start.recordTriggerType"
+      ]
+    },
+    {
+      "id": "screen_flow",
+      "priority": 60,
+      "when_any": [
+        { "path": "processType", "equals": "Flow" },
+        { "path": "elementCounts.screens", "gt": 0 }
+      ],
+      "classify_as": {
+        "metadata_type": "Flow metadata",
+        "automation_type": "Screen Flow",
+        "classification_confidence": "high"
+      },
+      "evidence_paths": [
+        "processType",
+        "elementCounts.screens"
+      ]
+    },
+    {
+      "id": "autolaunched_flow",
+      "priority": 50,
+      "when_all": [
+        { "path": "processType", "equals": "AutoLaunchedFlow" }
+      ],
+      "classify_as": {
+        "metadata_type": "Flow metadata",
+        "automation_type": "Autolaunched Flow",
+        "classification_confidence": "medium"
+      },
+      "evidence_paths": [
+        "processType",
+        "start.triggerType",
+        "start.recordTriggerType"
+      ]
+    }
+  ],
+  "fallback": {
+    "metadata_type": "Flow metadata",
+    "automation_type": "Flow / flow-based automation",
+    "classification_confidence": "low",
+    "documentation_note": "Automation type could not be confidently classified from configured rules."
+  }
+}

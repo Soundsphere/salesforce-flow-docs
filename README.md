@@ -201,8 +201,3 @@ Good documentation should help answer the real maintenance question:
 
 > What happens if this changes?
 
-## License
-
-Add a license before treating this as a reusable public starter kit.
-
-MIT is a reasonable default for an example repository, unless your organization requires something else.

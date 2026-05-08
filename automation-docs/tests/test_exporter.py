@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from automation_doc_exporter.classification import classify_automation
+from automation_doc_exporter.cli import display_output_path, resolve_output_path
 from automation_doc_exporter.exporter import export_automation_markdown
 from automation_doc_exporter.parser import collect_automation_documents
 
@@ -162,7 +163,7 @@ class ExporterTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             self._write(root / "force-app/main/default/flows/Contract_Renewal_Follow_Up.flow-meta.xml", FLOW_XML)
-            output = root / "automation-docs/output/salesforce-automation.md"
+            output = root / "docs/automation/evidence/salesforce-automation.md"
 
             summary = export_automation_markdown(root, output)
             markdown = output.read_text(encoding="utf-8")
@@ -190,7 +191,7 @@ class ExporterTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             self._write(root / "force-app/main/default/flows/Case_Processor_Status_Auto.flow-meta.xml", PROCESS_BUILDER_XML)
-            output = root / "automation-docs/output/salesforce-automation.md"
+            output = root / "docs/automation/evidence/salesforce-automation.md"
 
             export_automation_markdown(root, output)
             markdown = output.read_text(encoding="utf-8")
@@ -204,7 +205,7 @@ class ExporterTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             self._write(root / "force-app/main/default/flows/Case_Subprocess.flow-meta.xml", INVOCABLE_PROCESS_XML)
-            output = root / "automation-docs/output/salesforce-automation.md"
+            output = root / "docs/automation/evidence/salesforce-automation.md"
 
             export_automation_markdown(root, output)
             markdown = output.read_text(encoding="utf-8")
@@ -212,6 +213,36 @@ class ExporterTest(unittest.TestCase):
             self.assertIn("**Automation type:** Legacy invocable process / likely Process Builder subprocess", markdown)
             self.assertIn("**Classification confidence:** Medium", markdown)
             self.assertIn("variables.SObject = SObject / Case", markdown)
+
+    def test_cli_output_dir_resolves_default_evidence_filename(self) -> None:
+        root = Path("/repo")
+
+        output = resolve_output_path(
+            project_root=root,
+            output=None,
+            output_dir="docs/automation/evidence",
+        )
+
+        self.assertEqual(output, root / "docs/automation/evidence/salesforce-automation.md")
+
+    def test_cli_output_file_overrides_output_dir(self) -> None:
+        root = Path("/repo")
+
+        output = resolve_output_path(
+            project_root=root,
+            output="custom/path.md",
+            output_dir="docs/automation/evidence",
+        )
+
+        self.assertEqual(output, root / "custom/path.md")
+
+    def test_cli_display_path_allows_absolute_output_outside_project(self) -> None:
+        output = display_output_path(
+            project_root=Path("/repo"),
+            output_path=Path("/tmp/salesforce-automation.md"),
+        )
+
+        self.assertEqual(output, Path("/tmp/salesforce-automation.md"))
 
     def _write(self, path: Path, value: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)

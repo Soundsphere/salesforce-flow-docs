@@ -6,10 +6,11 @@ This tool exports Salesforce Flow, Process Builder, and Workflow XML metadata in
 
 - `automation-docs/src/automation_doc_exporter` - Python source code.
 - `automation-docs/tests` - unit tests, using only Python standard library.
-- `automation-docs/output` - generated Markdown files.
 - `automation-docs/docs` - documentation for the exporter.
 - `automation-docs/Dockerfile` - container image for running the exporter.
 - `automation-docs/compose.yml` - compose services for export and tests.
+- `docs/automation/evidence` - generated deterministic evidence files.
+- `docs/automation` - human-authored or agent-assisted automation documentation.
 
 ## Run From Project Root
 
@@ -20,7 +21,19 @@ docker compose -f automation-docs/compose.yml run --rm automation-docs
 The default output file is:
 
 ```text
-automation-docs/output/salesforce-automation.md
+docs/automation/evidence/salesforce-automation.md
+```
+
+To write the evidence file somewhere else, pass an output directory:
+
+```bash
+docker compose -f automation-docs/compose.yml run --rm automation-docs --output-dir docs/automation/evidence
+```
+
+For a fully custom file path, use `--output`:
+
+```bash
+docker compose -f automation-docs/compose.yml run --rm automation-docs --output tmp/salesforce-automation.md
 ```
 
 ## Run Tests

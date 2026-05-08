@@ -9,8 +9,8 @@ services:
     command:
       - --project-root
       - /workspace
-      - --output
-      - automation-docs/output/salesforce-automation.md
+      - --output-dir
+      - docs/automation/evidence
 
   tests:
     build:
@@ -27,4 +27,3 @@ services:
       - discover
       - -s
       - automation-docs/tests
-

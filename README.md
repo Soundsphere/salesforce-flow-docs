@@ -60,10 +60,10 @@ automation-docs/
   src/automation_doc_exporter/
   tests/
   docs/
-  output/
 
 docs/
   automation/
+    evidence/
   prompts/
 
 .github/agents/
@@ -83,19 +83,21 @@ Contains the deterministic exporter.
 
 The exporter reads Salesforce automation metadata and produces a structured Markdown evidence file.
 
-The generated example output is here:
+By default, the generated example evidence file is written here:
 
 ```text
-automation-docs/output/salesforce-automation.md
+docs/automation/evidence/salesforce-automation.md
 ```
 
-This output is intentionally committed so the documentation workflow can be reviewed without running the tool first.
+This evidence file is intentionally committed so the documentation workflow can be reviewed without running the tool first.
 
 ### `docs/automation/`
 
 Contains the human-readable documentation layer.
 
 This is where the example Living Technical Blueprint lives.
+
+The `docs/automation/evidence/` directory contains deterministic Markdown evidence generated from Salesforce metadata.
 
 ### `docs/prompts/`
 
@@ -122,7 +124,7 @@ docker compose -f automation-docs/compose.yml run --rm automation-docs
 The default output file is:
 
 ```text
-automation-docs/output/salesforce-automation.md
+docs/automation/evidence/salesforce-automation.md
 ```
 
 ## How to run tests
@@ -176,7 +178,7 @@ A generated draft should be reviewed by someone who understands the business pro
 ## Example workflow
 
 1. Review the example Flow metadata in `force-app/main/default/flows/`.
-2. Run the exporter or inspect the committed output in `automation-docs/output/`.
+2. Run the exporter or inspect the committed evidence in `docs/automation/evidence/`.
 3. Use the prompt in `docs/prompts/` to create a documentation draft.
 4. Review the generated draft.
 5. Update the Automation Impact Map and Living Technical Blueprint.
@@ -200,4 +202,3 @@ A record change may trigger Flows, Apex, validation rules, related-object automa
 Good documentation should help answer the real maintenance question:
 
 > What happens if this changes?
-

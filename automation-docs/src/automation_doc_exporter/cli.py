@@ -5,6 +5,9 @@ from pathlib import Path
 
 from .exporter import export_automation_markdown
 
+DEFAULT_OUTPUT_DIR = "docs/automation/evidence"
+DEFAULT_OUTPUT_FILENAME = "salesforce-automation.md"
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -17,10 +20,33 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--output",
-        default="automation-docs/output/salesforce-automation.md",
-        help="Markdown output file, relative to project root unless absolute.",
+        default=None,
+        help="Markdown output file, relative to project root unless absolute. Overrides --output-dir.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=DEFAULT_OUTPUT_DIR,
+        help="Directory for the generated evidence file, relative to project root unless absolute.",
     )
     return parser
+
+
+def resolve_output_path(project_root: Path, output: str | None, output_dir: str) -> Path:
+    if output:
+        output_path = Path(output)
+    else:
+        output_path = Path(output_dir) / DEFAULT_OUTPUT_FILENAME
+
+    if not output_path.is_absolute():
+        return project_root / output_path
+    return output_path
+
+
+def display_output_path(project_root: Path, output_path: Path) -> Path:
+    try:
+        return output_path.relative_to(project_root)
+    except ValueError:
+        return output_path
 
 
 def main() -> int:
@@ -28,17 +54,18 @@ def main() -> int:
     args = parser.parse_args()
 
     project_root = Path(args.project_root).resolve()
-    output_path = Path(args.output)
-    if not output_path.is_absolute():
-        output_path = project_root / output_path
+    output_path = resolve_output_path(
+        project_root=project_root,
+        output=args.output,
+        output_dir=args.output_dir,
+    )
 
     summary = export_automation_markdown(project_root=project_root, output_path=output_path)
     print(
         "Wrote {output} with {flows} flows/process builders and {workflows} workflow files.".format(
-            output=output_path.relative_to(project_root),
+            output=display_output_path(project_root, output_path),
             flows=summary.flow_count,
             workflows=summary.workflow_count,
         )
     )
     return 0
-

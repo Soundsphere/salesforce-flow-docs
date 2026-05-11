@@ -15,11 +15,29 @@ class ExportSummary:
 
 def export_automation_markdown(project_root: Path, output_path: Path) -> ExportSummary:
     documents = collect_automation_documents(project_root)
-    markdown = render_markdown(documents)
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(markdown, encoding="utf-8")
+    # Determine output directory
+    if output_path.suffix == '.md':
+        output_dir = output_path.parent
+    else:
+        output_dir = output_path
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-    flow_count = sum(1 for document in documents if document.metadata_type == "Flow metadata")
-    workflow_count = sum(1 for document in documents if document.kind == "Workflow")
+    flow_count = 0
+    workflow_count = 0
+
+    for document in documents:
+        # Create markdown filename from XML filename
+        xml_path = Path(document.source_path)
+        md_name = xml_path.stem + ".md"
+        output_file = output_dir / md_name
+
+        markdown = render_markdown([document])
+        output_file.write_text(markdown, encoding="utf-8")
+
+        if document.metadata_type == "Flow metadata":
+            flow_count += 1
+        if document.kind == "Workflow":
+            workflow_count += 1
+
     return ExportSummary(flow_count=flow_count, workflow_count=workflow_count)

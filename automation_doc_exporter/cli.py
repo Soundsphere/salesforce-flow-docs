@@ -5,8 +5,8 @@ from pathlib import Path
 
 from .exporter import export_automation_markdown
 
-DEFAULT_OUTPUT_DIR = "docs/automation/evidence"
-DEFAULT_OUTPUT_FILENAME = "salesforce-automation.md"
+DEFAULT_OUTPUT_DIR = "descriptions"
+DEFAULT_OUTPUT_FILENAME = ""
 
 
 def build_parser() -> argparse.ArgumentParser:

@@ -5,7 +5,7 @@ from pathlib import Path
 
 from .exporter import export_automation_markdown
 
-DEFAULT_OUTPUT_DIR = "descriptions"
+DEFAULT_OUTPUT_DIR = "flow descriptions"
 DEFAULT_OUTPUT_FILENAME = ""
 
 

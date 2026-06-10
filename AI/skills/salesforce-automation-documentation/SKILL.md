@@ -152,11 +152,8 @@ Explain fault paths, custom errors, logging, alerts, user-visible errors, and mi
 
 Suggest proposed validation scenarios unless actual tests are provided.
 
-## 10. Change notes
 
-Summarise change context if provided. Otherwise state that change context was not included.
-
-## 11. Open questions for human validation
+## 10. Open questions for human validation
 
 List only specific, meaningful validation questions.
 ```

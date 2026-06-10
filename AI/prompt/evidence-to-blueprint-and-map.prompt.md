@@ -321,22 +321,8 @@ Include:
 
 Mark all test scenarios as proposed unless existing tests are provided.
 
-## 10. Change notes
 
-If change context is provided, summarise:
-
-- related ticket / story;
-- reason for change;
-- release;
-- important design decision;
-- reviewer / approver;
-- date of last review.
-
-If not provided, write:
-
-> Change context was not included in the evidence file.
-
-## 11. Open questions for human validation
+## 10. Open questions for human validation
 
 List only meaningful questions.
 

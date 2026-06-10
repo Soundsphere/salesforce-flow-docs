@@ -151,11 +151,6 @@ Explain fault paths, custom errors, logging, alerts, user-visible errors, and mi
 ## 9. Testing and validation
 
 Suggest proposed validation scenarios unless actual tests are provided.
-
-
-## 10. Open questions for human validation
-
-List only specific, meaningful validation questions.
 ```
 
 ## Automation Impact Map output structure

@@ -320,22 +320,6 @@ Include:
 - regression checks for fields touched.
 
 Mark all test scenarios as proposed unless existing tests are provided.
-
-
-## 10. Open questions for human validation
-
-List only meaningful questions.
-
-Good questions:
-
-- What is the confirmed business purpose?
-- Who owns this automation?
-- Are the downstream effects complete?
-- Is the risk level correct?
-- Are there known related Flows, Apex triggers, validation rules, or integrations not included in the evidence?
-- Is the current behaviour intended or only historically accumulated?
-
-Avoid generic filler questions.
 ```
 
 ## Output 2 — Automation Impact Map row

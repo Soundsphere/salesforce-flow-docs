@@ -152,7 +152,6 @@ Use this structure:
 | Active version | |
 | Object / process area | |
 | Trigger / timing | |
-| Owner | Missing / requires validation |
 | Documentation status | Draft generated from evidence |
 
 ## 2. Business purpose

@@ -95,7 +95,6 @@ For each automation, create or update this structure:
 | Active version | |
 | Object / process area | |
 | Trigger / timing | |
-| Owner | Missing / validate |
 | Documentation status | Draft from evidence |
 
 ## 2. Business purpose

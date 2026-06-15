@@ -1,6 +1,6 @@
 ---
 name: salesforce-automation-documentation
-description: Use this skill when asked to create or update a Living Technical Blueprint, Automation Impact Map, Flow documentation, or review notes from Salesforce automation evidence files. Do not use it for extractor implementation unless explicitly asked.
+description: Use this skill when asked to create or update a Technical Blueprint, Automation Impact Map, Flow documentation, or review notes from Salesforce automation evidence files. Do not use it for extractor implementation unless explicitly asked.
 ---
 
 # Salesforce Automation Documentation Skill
@@ -21,7 +21,7 @@ The central question is:
 
 Use this skill when the user asks for any of the following:
 
-- Generate a Living Technical Blueprint from an evidence file.
+- Generate a Technical Blueprint from an evidence file.
 - Generate an Automation Impact Map from an evidence file.
 - Update an existing blueprint or map from new evidence.
 - Compare current documentation against evidence.
@@ -49,7 +49,7 @@ Before writing output, inspect the files the user points to.
 Typical input files:
 
 - evidence file
-- existing Living Technical Blueprint
+- existing Technical Blueprint
 - existing Automation Impact Map
 - previous generated documentation
 - Jira / Azure DevOps context

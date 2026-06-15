@@ -1,4 +1,4 @@
-# Evidence File to Living Technical Blueprint and Automation Impact Map Prompt
+# Evidence File to Technical Blueprint and Automation Impact Map Prompt
 
 ## Role
 
@@ -10,7 +10,7 @@ The evidence file was generated from Salesforce metadata, for example Flow XML t
 
 Your job is to create one or both of the following outputs:
 
-1. A **Living Technical Blueprint** section for each automation.
+1. A **Technical Blueprint** section for each automation.
 2. An **Automation Impact Map** row for each automation.
 
 The goal is not to describe the Flow canvas.  
@@ -124,7 +124,7 @@ Examples:
 
 Unless the user asks for only one output, generate all three outputs:
 
-1. Living Technical Blueprint section
+1. Technical Blueprint section
 2. Automation Impact Map row
 3. Review notes / validation checklist
 
@@ -132,7 +132,7 @@ If the user asks only for the blueprint, generate the blueprint and include a sh
 
 If the user asks only for the map, generate the map row and include short review notes.
 
-## Output 1 — Living Technical Blueprint section
+## Output 1 — Technical Blueprint section
 
 Create one section per automation.
 
